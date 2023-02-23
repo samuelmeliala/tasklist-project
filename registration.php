@@ -1,6 +1,19 @@
+<?php 
+require 'functions.php';
+
+if(isset($_POST["register"])){
+    if(registration($_POST) > 0){
+        echo "<script> alert('A new user has been added!');
+            </script>";
+    } else {
+        echo mysqli_error($conn);
+    }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +21,10 @@
     <title>Registration</title>
     <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
     <h1>Register Here</h1>
-    <form action="" method="post">
-        <table">
+    <form action="" method="POST">
+        <table>
             <tr>
                 <td><label for="name">Name </label></td>
                 <td><input type="text" name="name" id="name"></td>
@@ -35,5 +47,4 @@
         </table>
     </form>
 </body>
-
 </html>
