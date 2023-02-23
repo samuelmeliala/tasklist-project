@@ -1,3 +1,17 @@
+<?php 
+
+require 'functions.php';
+
+if(isset($_POST[""]))
+
+
+?>
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,14 +28,14 @@
     <table>
         <tr>
             <td><label for="">Add New Task : </label></td>
-            <td><input type="text" name="task-name" placeholder="Enter Task Name"></td>
+            <td><input type="text" name="taskname" placeholder="Enter Task Name"></td>
         </tr>
         <tr>
             <td><label for="">Deadline : </label></td>
-            <td><input type="date" name="task-date" id="task-date"></td>    
+            <td><input type="date" name="taskdate" id="task-date"></td>    
         </tr>
         <tr>
-            <td><input type="submit" value="Submit"></td>
+            <td><input type="submit" value="submit">Submit</td>
         </tr>
     </table>
     </form>
