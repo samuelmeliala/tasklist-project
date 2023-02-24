@@ -1,17 +1,25 @@
 <?php 
 require 'functions.php';
-
 if(isset($_POST["register"])){
-    if(register($_POST) > 0){
-        echo "<script> alert('A new user has been added!');
-            </script>";
-        header("location:index.php");
-    } else {
-        echo mysqli_error($conn);
-    }
-    
-}
+    $name = $_POST['name'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $password2 = $_POST['password2'];
 
+    // validasi input
+    if(empty(trim($name)) || empty(trim($username)) || empty(trim($password)) || empty(trim($password2))){
+        echo "<script>alert('Please fill all required fields');</script>";
+    } else {
+        // tambahkan user baru
+        if(register($_POST) > 0){
+            echo "<script>window.alert('A new user has been added!');</script>";
+            header("Location: index.php");
+            exit;
+        } else {
+            echo mysqli_error($conn);
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>

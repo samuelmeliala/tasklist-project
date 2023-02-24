@@ -25,7 +25,6 @@ function register($data){
         return false;
     } 
 
-    $password = password_hash($password, PASSWORD_DEFAULT);
 
     mysqli_query($conn, "INSERT INTO user VALUES('', '$name','$username', '$password')");
 
@@ -33,17 +32,19 @@ function register($data){
 
 }
 
-function createtask($data){
-    
-}
-
-
-
-
-
-
-
-
+function validate_login($conn, $username, $password) {
+    // Check if the username and password match a row in the database
+    $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
+    $result = $conn->query($sql);
+  
+    if ($result->num_rows > 0) {
+      // Login successful
+      return true;
+    } else {
+      // Login failed
+      return false;
+    }
+  }
 
 
 

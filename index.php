@@ -35,7 +35,7 @@ if(isset($_POST[""]))
             <td><input type="date" name="taskdate" id="task-date"></td>    
         </tr>
         <tr>
-            <td><input type="submit" value="submit">Submit</td>
+            <td><button type="submit" value="submit">Add Task</button></td>
         </tr>
     </table>
     </form>

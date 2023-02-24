@@ -1,26 +1,23 @@
 <?php 
 
+// Include the functions file
 require 'functions.php';
 
-if(isset($_POST["login"])){
+// If the login form is submitted
+if (isset($_POST['username']) && isset($_POST['password'])) {
+  $username = $_POST['username'];
+  $password = $_POST['password'];
 
-    $username = $_POST["username"];
-    $password = $_POST["password"];
-
-    $result = mysqli_query($conn, "SELECT * FROM user WHERE username = '$username'");
-
-    if(mysqli_num_rows($result) === 1){
-        $row = mysqli_fetch_assoc($result);
-
-        if(password_verif($password, $row["password"])) {
-            header("Location: index.php");
-            exit;
-        }
-    }
-
-    $error = true;
-
+  // Validate the login
+  if (validate_login($conn, $username, $password)) {
+    // Login successful
+    header('Location: index.php');
+  } else {
+    // Login failed
+    echo "Invalid login credentials.";
+  }
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -46,7 +43,7 @@ if(isset($_POST["login"])){
             </tr>
             <tr>
                 <td><label for="password">Password </label></td>
-                <td><input type="text" name="password" id="password"></td>
+                <td><input type="password" name="password" id="password"></td>
             </tr>
             <tr>
                 <td><button type="submit" name="login">Login</button></td>
