@@ -1,16 +1,34 @@
 <?php 
 
+session_start();
 require 'functions.php';
 
-if(isset($_POST[""]))
+if (isset($_SESSION["username"])) {
+    $name = $_SESSION["username"];
+    $print_name = $name;
+} else {
+    $print_name = "You are not logged in";
+}
 
+if (isset($_POST['submit'])) {
+    $taskname = $_POST['taskname'];
+    $date = $_POST['taskdate'];
+    add_task($taskname, $date);
+}
 
+if (isset($_POST['delete'])) {
+    $id = $_POST['id'];
+    delete_task($id);
+}
+
+if (isset($_POST['done'])) {
+    $id = $_POST['id'];
+    mark_task_done($id);
+}
+
+$tasks = get_all_tasks();
+$completed_tasks = get_completed_tasks();
 ?>
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -22,7 +40,10 @@ if(isset($_POST[""]))
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello, </h1>
+    <h1>Hello, <?php echo $print_name; ?></h1>
+    <form action="logout.php" method="post">
+        <button type="submit" name="logout">Logout</button>
+    </form>
     <form action="" method="post">
     <h2>Add New Task</h2>
     <table>

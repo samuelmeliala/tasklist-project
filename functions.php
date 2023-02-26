@@ -33,6 +33,7 @@ function register($data){
 }
 
 function validate_login($conn, $username, $password) {
+    global $conn;
     // Check if the username and password match a row in the database
     $sql = "SELECT * FROM user WHERE username = '$username' AND password = '$password'";
     $result = $conn->query($sql);
@@ -46,7 +47,43 @@ function validate_login($conn, $username, $password) {
     }
   }
 
+  function add_task($taskname, $date) {
+    global $conn;
+    $stmt = mysqli_prepare($conn, "INSERT INTO tasks (taskname, date) VALUES (?, ?)");
+    mysqli_stmt_bind_param($stmt, "ss", $taskname, $date);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
 
+function delete_task($id) {
+    global $conn;
+    $stmt = mysqli_prepare($conn, "DELETE FROM tasks WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
 
+function mark_task_done($id) {
+    global $conn;
+    $stmt = mysqli_prepare($conn, "UPDATE tasks SET done = 1 WHERE id = ?");
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+}
 
+function get_all_tasks() {
+    global $conn;
+    $result = mysqli_query($conn, "SELECT * FROM tasks WHERE done = 0 ORDER BY date ASC");
+    $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $tasks;
+}
+
+function get_completed_tasks() {
+    global $conn;
+    $result = mysqli_query($conn, "SELECT * FROM tasks WHERE done = 1 ORDER BY date ASC");
+    $tasks = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    mysqli_free_result($result);
+    return $tasks;
+}
 ?>

@@ -27,13 +27,10 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>Login</h1>
-
-    <?php if(isset($error)) : ?>
-        <p style="color: red; font-style: italic;"> Username / Password is Wrong!</p>
-    <?php endif; ?>
 
     <form action="" method="POST">
         <table>
@@ -51,6 +48,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         </table>
 
     </form>
-    
+    <p>
+            New Here?
+            <a href="registration.php">
+                Click here to register!
+            </a>
+        </p>
 </body>
 </html>

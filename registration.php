@@ -56,5 +56,11 @@ if(isset($_POST["register"])){
             </tr>
         </table>
     </form>
+    <p>
+            Already have an account?
+            <a href="login.php">
+                Click here to login!
+            </a>
+        </p>
 </body>
 </html>
